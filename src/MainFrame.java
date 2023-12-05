@@ -14,6 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
+ * @author Michael Ike
+ * @version 1.0
+ * @since 12/04/2023
+ */
+
+/**
  * MainFrame class represents the main frame of Mike's Music Application.
  * It sets up the graphical user interface with text fields, buttons, and labels.
  */
@@ -100,7 +106,7 @@ public class MainFrame extends JFrame {
         // Adding the main panel to the frame
         add(mainPanel);
 
-        setTitle("Mike's Music Application");
+        setTitle("Mike Ike's Music Recommendation System");
         setSize(500, 600);
         setMinimumSize(new Dimension(600, 800));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
