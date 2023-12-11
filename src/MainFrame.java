@@ -37,7 +37,26 @@ public class MainFrame extends JFrame {
      */
     public void initialize() {
 
-        /********** Form Panel **********/
+        /********** North Panel **********/
+        //Welcome and sign-in labels for the north region
+        JLabel welcomeLabel = new JLabel("Welcome to Mike Ike's Music Recommendation System (MIMRS)!");
+        welcomeLabel.setFont(mainFont);
+
+        JLabel signInLabel = new JLabel("Please Sign In");
+        signInLabel.setFont(mainFont);
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new GridLayout(2, 1, 5, 5));
+        northPanel.setOpaque(false);
+        northPanel.add(welcomeLabel);
+        northPanel.add(signInLabel);
+
+        /********** Central Panel **********/
+        JPanel centralPanel = new JPanel();
+        centralPanel.setLayout(new GridLayout(5, 1, 5, 5));
+        centralPanel.setOpaque(false);
+
+
         JLabel lbFirstName = new JLabel("First Name");
         lbFirstName.setFont(mainFont);
 
@@ -47,22 +66,19 @@ public class MainFrame extends JFrame {
         JLabel lbLastName = new JLabel("Last Name");
         lbLastName.setFont(mainFont);
 
-        tfLastName = new JTextField();
-        tfLastName.setFont(mainFont);
-
-        JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(4, 1, 5, 5));
-        formPanel.setOpaque(false);
-        formPanel.add(lbFirstName);
-        formPanel.add(tfFirstName);
-        formPanel.add(lbLastName);
-        formPanel.add(tfLastName);
-
-        /********** Welcome Panel **********/
         lbWelcome = new JLabel();
         lbWelcome.setFont(mainFont);
 
-        /********** Buttons Panel **********/
+        tfLastName = new JTextField();
+        tfLastName.setFont(mainFont);
+
+        centralPanel.add(lbFirstName);
+        centralPanel.add(tfFirstName);
+        centralPanel.add(lbLastName);
+        centralPanel.add(tfLastName);
+        centralPanel.add(lbWelcome);
+
+        /********** South Panel **********/
         JButton btnOK = new JButton("OK");
         btnOK.setFont(mainFont);
         btnOK.addActionListener(new ActionListener() {
@@ -71,7 +87,16 @@ public class MainFrame extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 String firstName = tfFirstName.getText();
                 String lastName = tfLastName.getText();
-                lbWelcome.setText("Hello " + firstName + " " + lastName);
+
+                if (firstName.isEmpty() || lastName.isEmpty()) {
+                    // Show "Incorrect login" message
+                    welcomeLabel.setText("INCORRECT LOGIN");
+                    signInLabel.setText("");
+                    return;
+                }else{
+                    lbWelcome.setText("Hello " + firstName + " " + lastName);
+                    welcomeLabel.setText("");
+                }
             }
 
         });
@@ -88,20 +113,20 @@ public class MainFrame extends JFrame {
             }
         });
 
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(1, 2, 5, 5));
-        buttonsPanel.setOpaque(false);
-        buttonsPanel.add(btnOK);
-        buttonsPanel.add(btnClear);
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new GridLayout(1, 2, 5, 5));
+        southPanel.setOpaque(false);
+        southPanel.add(btnOK);
+        southPanel.add(btnClear);
 
         // Main panel setup
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(new Color(128, 128, 255));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        mainPanel.add(formPanel, BorderLayout.NORTH);
-        mainPanel.add(lbWelcome, BorderLayout.CENTER);
-        mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
+        mainPanel.add(northPanel, BorderLayout.NORTH);
+        mainPanel.add(centralPanel, BorderLayout.CENTER);
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
 
         // Adding the main panel to the frame
         add(mainPanel);
@@ -112,6 +137,8 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
+
 
     /**
      * Entry point for the Music Application.
