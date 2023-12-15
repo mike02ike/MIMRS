@@ -110,6 +110,8 @@ public class MainFrame extends JFrame {
                 tfFirstName.setText("");
                 tfLastName.setText("");
                 lbWelcome.setText("");
+                welcomeLabel.setText("");
+                signInLabel.setText("Please Sign In");
             }
         });
 
@@ -133,7 +135,7 @@ public class MainFrame extends JFrame {
 
         setTitle("Mike Ike's Music Recommendation System");
         setSize(500, 600);
-        setMinimumSize(new Dimension(600, 800));
+        setMinimumSize(new Dimension(300, 400));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
